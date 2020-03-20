@@ -2,11 +2,14 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PizzaBox.Client.Models;
+using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Client.Controllers
 {
   public class OrderController : Controller
   {
+    public OrderModel or = new OrderModel();
+
     [HttpGet]
     public IActionResult Details()
     {
@@ -23,9 +26,14 @@ namespace PizzaBox.Client.Controllers
     {
       if(ModelState.IsValid)
       {
-        //add to the Pizzalist
+        Pizza p = new Pizza();
+        p.crust = pizza.Crust;
+        p.size = pizza.Size;
+
+        or.PizzaList.Add(p);
+   
         
-        return RedirectToAction("Details");
+        return RedirectToAction("Details", or);
       }
       return View("Add", pizza);
     }

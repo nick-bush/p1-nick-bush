@@ -9,6 +9,11 @@ namespace PizzaBox.Domain.Models
 
     public List<Pizza> Pizzas { get; set; }
 
+    public override string ToString()
+    {
+      return $"{Name ?? "N/A"} {Price}";
+    }
+
     public Size()
     {
       

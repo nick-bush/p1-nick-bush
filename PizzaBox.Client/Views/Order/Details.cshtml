@@ -1,0 +1,8 @@
+@model PizzaBox.Client.Models.OrderModel;
+
+<h2>Order Details</h2>
+
+@foreach(var item in @Model.PizzaList)
+{
+  <p>@item.ToString()</p>
+}

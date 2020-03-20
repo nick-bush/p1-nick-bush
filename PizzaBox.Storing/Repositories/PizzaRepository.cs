@@ -10,8 +10,8 @@ namespace PizzaBox.Storing.Repositories
     private static readonly PizzaBoxDbContext _db = PizzaBoxDbContext.Instance;
 
     public List<Crust> GetAllCrusts()
-    {
-      return _db.Crusts.ToList();
+    { 
+      return _db.Crusts.ToList();   
     }
 
     public List<Size> GetAllSizes()
