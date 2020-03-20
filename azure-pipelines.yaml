@@ -1,0 +1,41 @@
+name: $(date:yyyyMMdd)$(rev:.rr) #name of each build will be 20200319.00 and will increment
+
+#if there is a pull request associated with the source, run the pipeline
+pr:
+  -master
+
+#trigger - when should this pipeline automatically run?
+
+trigger:
+  - master
+
+stages:
+  - stage: build
+    jobs:
+      - job: build_dotnet
+        pool: 
+          vmImage: ubuntu-18.04 
+        steps:
+            - script: dotnet build
+
+  #- stage: analyze
+  - stage: test
+    jobs:
+      - job: test
+        pool:
+          vmImage: ubuntu-18.04
+        steps:
+          - script: dotnet test --collect:"XPlat Code Coverage"
+  - stage: pack
+    jobs:
+      - job:
+        pool:
+          vmImage: ubuntu-18.04
+        steps:
+          - script: |
+            docker login
+            docker image build -f dockerfile -t p1/p1-nick-bush .
+            docker image push p1/p1-nick-bush .
+            docker logout
+
+#variables:

@@ -1,0 +1,20 @@
+@model PizzaBox.Client.Models.PizzaModel
+
+@*Use HTML Helpers to make drop downs of crust, size, and pizzas*@
+
+<form action = "/Order/add" method = "post">
+  @Html.AntiForgeryToken()
+  <select asp-for="@Model.Crust">
+    @foreach(var item in @Model.CrustList)
+    {
+      <option value="item">item</option>
+    }
+  </select>
+    <select asp-for="@Model.Size">
+    @foreach(var item in @Model.SizeList)
+    {
+      <option value="item">item</option>
+    }
+  </select>
+
+</form>
