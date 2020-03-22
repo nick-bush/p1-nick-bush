@@ -11,14 +11,28 @@ namespace PizzaBox.Client.Controllers
   {
     private static readonly OrderRepository _or = new OrderRepository();
     private static readonly PizzaRepository _pr = new PizzaRepository();
+    private static StoreRepository _sr = new StoreRepository();
     public static List<Pizza> PizzaList = new List<Pizza>();
+
+    public static List<Store> StoreList = _sr.GetAllStores();
+
+    public static List<string> StoreNameList = new List <string>();
+
+    
     public static List<PizzaModel> PizzaModelList = new List<PizzaModel>();
 
+    public static string UN = "";
     [HttpGet]
     public IActionResult Details()
     {
       return View();
     }
+
+    // [HttpGet]
+    // public IActionResult SelectStore(string Username)
+    // {
+    // }
+
 
     [HttpGet]
     public IActionResult Checkout()
@@ -77,16 +91,6 @@ namespace PizzaBox.Client.Controllers
       return View("Add", pmod);
     }
 
-    [HttpGet]
-    public IActionResult UserOptions()
-    {
-      return View();
-    }
-
-    // [HttpPost]
-    // public IActionResult Remove(PizzaModel pizza)
-    // {
-
-    // }
+    
   }
 }

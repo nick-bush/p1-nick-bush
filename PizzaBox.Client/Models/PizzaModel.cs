@@ -13,6 +13,8 @@ namespace PizzaBox.Client.Models
     public List<Size> SizeList = new List<Size>();
     //public List<string> TypeList = new List<string>();
 
+    public User User {get; set;}
+
     [BindProperty]
     public string Crust { get; set; }
 

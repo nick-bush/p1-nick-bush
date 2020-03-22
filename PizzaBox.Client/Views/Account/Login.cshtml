@@ -10,6 +10,9 @@
   <label asp-for="@Model.Password">Password</label>
   <input type ="password" asp-for="@Model.Password"/>
   @Html.ValidationMessageFor(avm => avm.Password)
+  
+  <label asp-for="@Model.isUser">Customer?</label>
+  @Html.CheckBoxFor(m => m.isUser)
 
   <button type = "reset">Clear</button>
   <button type="submit">Login</button>
