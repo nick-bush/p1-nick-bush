@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 using PizzaBox.Domain.Models;
 using PizzaBox.Storing.Repositories;
 
@@ -11,9 +12,14 @@ namespace PizzaBox.Client.Models
     public List<Crust> CrustList = new List<Crust>();
     public List<Size> SizeList = new List<Size>();
     //public List<string> TypeList = new List<string>();
-    public Crust Crust { get; set; }
 
-    public Size Size { get; set; }
+    [BindProperty]
+    public string Crust { get; set; }
+
+    [BindProperty]
+    public string Size { get; set; }
+
+    public decimal cost {get; set;}
 
     //public string Type {get; set;}
 

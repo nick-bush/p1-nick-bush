@@ -90,7 +90,7 @@ namespace PizzaBox.Storing.Migrations
 
                     b.HasIndex("usrUId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Pizza", b =>
@@ -120,7 +120,7 @@ namespace PizzaBox.Storing.Migrations
 
                     b.HasIndex("ordOId");
 
-                    b.ToTable("Pizza");
+                    b.ToTable("Pizzas");
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Size", b =>
@@ -184,7 +184,30 @@ namespace PizzaBox.Storing.Migrations
 
                     b.HasKey("SId");
 
-                    b.ToTable("Store");
+                    b.ToTable("Stores");
+
+                    b.HasData(
+                        new
+                        {
+                            SId = 1L,
+                            location = "Domino's",
+                            password = "dominos",
+                            username = "dominos"
+                        },
+                        new
+                        {
+                            SId = 2L,
+                            location = "Papa John's",
+                            password = "papajohn",
+                            username = "papajohn"
+                        },
+                        new
+                        {
+                            SId = 3L,
+                            location = "Nick's Pizza",
+                            password = "deepdishonly",
+                            username = "nickspizza"
+                        });
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.User", b =>
@@ -202,7 +225,27 @@ namespace PizzaBox.Storing.Migrations
 
                     b.HasKey("UId");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UId = 1L,
+                            password = "password",
+                            username = "nick"
+                        },
+                        new
+                        {
+                            UId = 2L,
+                            password = "password12345",
+                            username = "fred"
+                        },
+                        new
+                        {
+                            UId = 3L,
+                            password = "passwordrandom",
+                            username = "random"
+                        });
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Crust", b =>

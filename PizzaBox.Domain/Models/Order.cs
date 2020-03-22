@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PizzaBox.Domain.Abstracts;
 
@@ -35,12 +36,10 @@ namespace PizzaBox.Domain.Models
        get; set;
     }
 
-    public Order() // commenting this out to get database set up User usr, Store str)
+    public Order()
     {
-      // this.usr = usr;
-      // this.str = str;
-      // pizzaList = new List<Pizza>();
-      // cost = 0;
+     
+      //OId = DateTime.Now.Ticks;
 
     }
 

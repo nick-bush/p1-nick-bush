@@ -1,8 +1,46 @@
-@model PizzaBox.Client.Models.OrderModel;
-
+@model List<PizzaModel>
+@{
+  decimal total = 0.00M;
+  foreach(var c in Model)
+  {
+    total = total+c.cost;
+  }
+}
 <h2>Order Details</h2>
 
-@foreach(var item in @Model.PizzaList)
-{
-  <p>@item.ToString()</p>
+<table class="table">
+    <thead>
+        <tr>
+          <th>Crust</th>
+          <th>Size</th>  
+          <th>Cost</th>                              
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in @Model) {
+  <tr>
+    <td>
+      @item.Crust
+    </td>
+    <td>
+      @item.Size
+    </td>
+    <td>
+      @item.cost
+    </td>
+  </tr>
 }
+  <tr>
+    <td>
+      Total
+    </td>
+    <td> 
+    </td>
+    <td>
+      @total
+    </td>
+  </tr>
+    </tbody>
+</table>
+<a href="/order/add">Add another pizza</a>
+<a href ="/order/checkout">Checkout</a>

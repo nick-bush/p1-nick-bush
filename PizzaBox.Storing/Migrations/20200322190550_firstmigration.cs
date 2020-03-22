@@ -7,7 +7,7 @@ namespace PizzaBox.Storing.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Store",
+                name: "Stores",
                 columns: table => new
                 {
                     SId = table.Column<long>(nullable: false)
@@ -18,11 +18,11 @@ namespace PizzaBox.Storing.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Store", x => x.SId);
+                    table.PrimaryKey("PK_Stores", x => x.SId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Users",
                 columns: table => new
                 {
                     UId = table.Column<long>(nullable: false)
@@ -32,11 +32,11 @@ namespace PizzaBox.Storing.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.UId);
+                    table.PrimaryKey("PK_Users", x => x.UId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     OId = table.Column<long>(nullable: false)
@@ -47,23 +47,23 @@ namespace PizzaBox.Storing.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.OId);
+                    table.PrimaryKey("PK_Orders", x => x.OId);
                     table.ForeignKey(
-                        name: "FK_Order_Store_strSId",
+                        name: "FK_Orders_Stores_strSId",
                         column: x => x.strSId,
-                        principalTable: "Store",
+                        principalTable: "Stores",
                         principalColumn: "SId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Order_User_usrUId",
+                        name: "FK_Orders_Users_usrUId",
                         column: x => x.usrUId,
-                        principalTable: "User",
+                        principalTable: "Users",
                         principalColumn: "UId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pizza",
+                name: "Pizzas",
                 columns: table => new
                 {
                     PId = table.Column<long>(nullable: false)
@@ -75,11 +75,11 @@ namespace PizzaBox.Storing.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pizza", x => x.PId);
+                    table.PrimaryKey("PK_Pizzas", x => x.PId);
                     table.ForeignKey(
-                        name: "FK_Pizza_Order_ordOId",
+                        name: "FK_Pizzas_Orders_ordOId",
                         column: x => x.ordOId,
-                        principalTable: "Order",
+                        principalTable: "Orders",
                         principalColumn: "OId",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -98,9 +98,9 @@ namespace PizzaBox.Storing.Migrations
                 {
                     table.PrimaryKey("PK_Crusts", x => x.CrustId);
                     table.ForeignKey(
-                        name: "FK_Crusts_Pizza_PizzaPId",
+                        name: "FK_Crusts_Pizzas_PizzaPId",
                         column: x => x.PizzaPId,
-                        principalTable: "Pizza",
+                        principalTable: "Pizzas",
                         principalColumn: "PId",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -119,9 +119,9 @@ namespace PizzaBox.Storing.Migrations
                 {
                     table.PrimaryKey("PK_Sizes", x => x.SizeId);
                     table.ForeignKey(
-                        name: "FK_Sizes_Pizza_PizzaPId",
+                        name: "FK_Sizes_Pizzas_PizzaPId",
                         column: x => x.PizzaPId,
-                        principalTable: "Pizza",
+                        principalTable: "Pizzas",
                         principalColumn: "PId",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -147,34 +147,54 @@ namespace PizzaBox.Storing.Migrations
                     { 3L, "Small", null, 8.00m }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Stores",
+                columns: new[] { "SId", "location", "password", "username" },
+                values: new object[,]
+                {
+                    { 1L, "Domino's", "dominos", "dominos" },
+                    { 2L, "Papa John's", "papajohn", "papajohn" },
+                    { 3L, "Nick's Pizza", "deepdishonly", "nickspizza" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UId", "password", "username" },
+                values: new object[,]
+                {
+                    { 1L, "password", "nick" },
+                    { 2L, "password12345", "fred" },
+                    { 3L, "passwordrandom", "random" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Crusts_PizzaPId",
                 table: "Crusts",
                 column: "PizzaPId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_strSId",
-                table: "Order",
+                name: "IX_Orders_strSId",
+                table: "Orders",
                 column: "strSId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_usrUId",
-                table: "Order",
+                name: "IX_Orders_usrUId",
+                table: "Orders",
                 column: "usrUId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pizza_CrustId",
-                table: "Pizza",
+                name: "IX_Pizzas_CrustId",
+                table: "Pizzas",
                 column: "CrustId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pizza_SizeId",
-                table: "Pizza",
+                name: "IX_Pizzas_SizeId",
+                table: "Pizzas",
                 column: "SizeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pizza_ordOId",
-                table: "Pizza",
+                name: "IX_Pizzas_ordOId",
+                table: "Pizzas",
                 column: "ordOId");
 
             migrationBuilder.CreateIndex(
@@ -183,16 +203,16 @@ namespace PizzaBox.Storing.Migrations
                 column: "PizzaPId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Pizza_Crusts_CrustId",
-                table: "Pizza",
+                name: "FK_Pizzas_Crusts_CrustId",
+                table: "Pizzas",
                 column: "CrustId",
                 principalTable: "Crusts",
                 principalColumn: "CrustId",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Pizza_Sizes_SizeId",
-                table: "Pizza",
+                name: "FK_Pizzas_Sizes_SizeId",
+                table: "Pizzas",
                 column: "SizeId",
                 principalTable: "Sizes",
                 principalColumn: "SizeId",
@@ -202,15 +222,15 @@ namespace PizzaBox.Storing.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Crusts_Pizza_PizzaPId",
+                name: "FK_Crusts_Pizzas_PizzaPId",
                 table: "Crusts");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Sizes_Pizza_PizzaPId",
+                name: "FK_Sizes_Pizzas_PizzaPId",
                 table: "Sizes");
 
             migrationBuilder.DropTable(
-                name: "Pizza");
+                name: "Pizzas");
 
             migrationBuilder.DropTable(
                 name: "Crusts");
@@ -219,13 +239,13 @@ namespace PizzaBox.Storing.Migrations
                 name: "Sizes");
 
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "Store");
+                name: "Stores");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "Users");
         }
     }
 }

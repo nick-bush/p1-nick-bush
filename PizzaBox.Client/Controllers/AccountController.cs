@@ -6,16 +6,16 @@ namespace PizzaBox.Client.Controllers
   public class AccountController : Controller
   {
     [HttpGet]
-
     public IActionResult Login()
     {
       return View();
     }
 
-    //[HttpPost]
-    // public IActionResult Login(AccountModel account)
-    // {
+    [HttpPost]
+    public IActionResult Login(AccountModel account)
+    {
       
-    // }
+      return View("Add", new PizzaModel());
+    }
   }
 }

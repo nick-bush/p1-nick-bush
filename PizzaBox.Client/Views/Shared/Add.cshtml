@@ -10,14 +10,14 @@
   <select asp-for="@Model.Crust">
     @foreach(var item in @Model.CrustList)
     {
-      <option value="@item.ToString()">item</option>
+      <option value="@item.Name">@item.ToString()</option>
     }
   </select>
 
   <select asp-for="@Model.Size">
     @foreach(var item in @Model.SizeList)
     {
-      <option value="@item.ToString()">item()</option>
+      <option value="@item.Name">@item.ToString()</option>
     }
   </select>
 

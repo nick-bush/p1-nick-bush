@@ -1,3 +1,4 @@
+using System;
 using PizzaBox.Domain.Abstracts;
 
 namespace PizzaBox.Domain.Models
@@ -24,6 +25,7 @@ namespace PizzaBox.Domain.Models
       get; set;
     }
 
+    
     public long PId
     {
       get; set;
@@ -32,7 +34,7 @@ namespace PizzaBox.Domain.Models
 
     public Pizza()
     {
-      
+      //PId = DateTime.Now.Ticks;
     }
     public override string ToString()
     {

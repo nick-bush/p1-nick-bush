@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PizzaBox.Domain.Models;
 using PizzaBox.Storing.Databases;
 
@@ -18,5 +19,14 @@ namespace PizzaBox.Storing.Repositories
     {
       return _db.Sizes.ToList();
     }
+
+    public void Post(Pizza p)
+    {  
+
+      _db.Pizzas.Add(p);
+      _db.SaveChanges();
+
+    }
+
   } 
 }

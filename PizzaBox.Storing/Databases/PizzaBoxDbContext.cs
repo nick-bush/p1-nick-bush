@@ -18,6 +18,12 @@ namespace PizzaBox.Storing.Databases
     public DbSet<Size> Sizes {get; set;}
     public DbSet<Crust> Crusts { get; set; }
 
+    public DbSet<Order> Orders {get; set;}
+    public DbSet<Pizza> Pizzas {get; set;}
+    public DbSet<User> Users {get; set;}
+    public DbSet<Store> Stores{get; set;}
+
+
     //public DbSet<Pizza> Pizzas { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
@@ -53,6 +59,20 @@ namespace PizzaBox.Storing.Databases
         new Size() { Name = "Large", Price = 12.00M, SizeId = 1 },
         new Size() { Name = "Medium", Price = 10.00M, SizeId = 2 },
         new Size() { Name = "Small", Price = 8.00M, SizeId = 3 },
+      });
+
+      builder.Entity<User>().HasData(new User[]
+      {
+        new User() {username ="nick", password = "password", UId =1 },
+        new User() {username ="fred", password = "password12345", UId=2  },
+        new User() {username ="random", password = "passwordrandom",UId =3 },
+      });
+
+      builder.Entity<Store>().HasData(new Store[]
+      {
+        new Store() {location ="Domino's", username = "dominos" ,password = "dominos", SId = 1 },
+        new Store() {location ="Papa John's",username = "papajohn" , password = "papajohn", SId = 2  },
+        new Store() {location ="Nick's Pizza",username = "nickspizza" , password = "deepdishonly", SId = 3 },
       });
     }
   }

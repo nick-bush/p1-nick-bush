@@ -6,7 +6,7 @@ namespace PizzaBox.Client.Models
 {
   public class OrderModel
   {
-    public List<Pizza> PizzaList = new List<Pizza>();
+    public List<PizzaModel> PizzaModelList = new List<PizzaModel>();
 
     public User User { get; set; }
     public Store Store{get; set;}
