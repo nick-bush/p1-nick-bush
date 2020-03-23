@@ -6,21 +6,29 @@
 
 <form action = "/Order/add" method = "post">
   @Html.AntiForgeryToken()
+    <select asp-for="@Model.Type" class="selectpicker">
+    @foreach(var item in @Model.TypeList)
+    {
+      <option value="@item.Name">@item.ToString()</option>
+    }
+  </select>
 
-  <select asp-for="@Model.Crust">
+  <select asp-for="@Model.Crust" class="selectpicker">
     @foreach(var item in @Model.CrustList)
     {
       <option value="@item.Name">@item.ToString()</option>
     }
   </select>
 
-  <select asp-for="@Model.Size">
+  <select asp-for="@Model.Size" class="selectpicker">
     @foreach(var item in @Model.SizeList)
     {
       <option value="@item.Name">@item.ToString()</option>
     }
   </select>
 
-  <button type = "submit">Add Pizza</button>
+  
+  <button type="submit" class="btn btn-primary">Add</button>
+
 
 </form>

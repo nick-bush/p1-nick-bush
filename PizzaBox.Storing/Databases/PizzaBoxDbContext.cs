@@ -17,6 +17,7 @@ namespace PizzaBox.Storing.Databases
 
     public DbSet<Size> Sizes {get; set;}
     public DbSet<Crust> Crusts { get; set; }
+    public DbSet<Type> Types { get; set; }
 
     public DbSet<Order> Orders {get; set;}
     public DbSet<Pizza> Pizzas {get; set;}
@@ -39,8 +40,10 @@ namespace PizzaBox.Storing.Databases
       builder.Entity<User>().HasKey(u => u.UId);
       builder.Entity<Crust>().HasKey(c => c.CrustId);
       builder.Entity<Size>().HasKey(s => s.SizeId);
+      builder.Entity<Type>().HasKey(t => t.TypeId);
 
       builder.Entity<Crust>().HasMany(c => c.Pizzas).WithOne(p => p.crust);
+      builder.Entity<Type>().HasMany(t => t.Pizzas).WithOne(p => p.type);
       builder.Entity<Size>().HasMany(s => s.Pizzas).WithOne(p => p.size);
       builder.Entity<Order>().HasMany(o => o.Pizzas).WithOne(p => p.ord);
       builder.Entity<User>().HasMany(u => u.Orders).WithOne(o => o.usr);
@@ -59,6 +62,13 @@ namespace PizzaBox.Storing.Databases
         new Size() { Name = "Large", Price = 12.00M, SizeId = 1 },
         new Size() { Name = "Medium", Price = 10.00M, SizeId = 2 },
         new Size() { Name = "Small", Price = 8.00M, SizeId = 3 },
+      });
+
+      builder.Entity<Type>().HasData(new Type[]
+      {
+        new Type() { Name = "Pepperoni", Price = 3.00M, TypeId = 1 },
+        new Type() { Name = "Sausage", Price = 3.00M, TypeId = 2 },
+        new Type() { Name = "Vegetable", Price = 3.00M, TypeId = 3 },
       });
 
       builder.Entity<User>().HasData(new User[]

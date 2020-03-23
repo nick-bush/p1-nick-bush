@@ -19,6 +19,10 @@ namespace PizzaBox.Storing.Repositories
     {
       return _db.Sizes.ToList();
     }
+    public List<Type> GetAllTypes()
+    {
+      return _db.Types.ToList();
+    }
 
     public void Post(Pizza p)
     {  

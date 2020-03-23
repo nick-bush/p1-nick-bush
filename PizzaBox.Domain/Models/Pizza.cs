@@ -16,6 +16,11 @@ namespace PizzaBox.Domain.Models
       get; set;
     }
 
+    public Type type
+    {
+      get; set;
+    }
+
     public override Crust crust
     {
       get; set;

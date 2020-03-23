@@ -10,8 +10,8 @@ using PizzaBox.Storing.Databases;
 namespace PizzaBox.Storing.Migrations
 {
     [DbContext(typeof(PizzaBoxDbContext))]
-    [Migration("20200322190550_firstmigration")]
-    partial class firstmigration
+    [Migration("20200323204208_secondmigration")]
+    partial class secondmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -108,6 +108,9 @@ namespace PizzaBox.Storing.Migrations
                     b.Property<long?>("SizeId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("TypeId")
+                        .HasColumnType("bigint");
+
                     b.Property<decimal>("cost")
                         .HasColumnType("decimal(18,2)");
 
@@ -119,6 +122,8 @@ namespace PizzaBox.Storing.Migrations
                     b.HasIndex("CrustId");
 
                     b.HasIndex("SizeId");
+
+                    b.HasIndex("TypeId");
 
                     b.HasIndex("ordOId");
 
@@ -212,6 +217,49 @@ namespace PizzaBox.Storing.Migrations
                         });
                 });
 
+            modelBuilder.Entity("PizzaBox.Domain.Models.Type", b =>
+                {
+                    b.Property<long>("TypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("PizzaPId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("TypeId");
+
+                    b.HasIndex("PizzaPId");
+
+                    b.ToTable("Types");
+
+                    b.HasData(
+                        new
+                        {
+                            TypeId = 1L,
+                            Name = "Pepperoni",
+                            Price = 3.00m
+                        },
+                        new
+                        {
+                            TypeId = 2L,
+                            Name = "Sausage",
+                            Price = 3.00m
+                        },
+                        new
+                        {
+                            TypeId = 3L,
+                            Name = "Vegetable",
+                            Price = 3.00m
+                        });
+                });
+
             modelBuilder.Entity("PizzaBox.Domain.Models.User", b =>
                 {
                     b.Property<long>("UId")
@@ -278,12 +326,23 @@ namespace PizzaBox.Storing.Migrations
                         .WithMany("Pizzas")
                         .HasForeignKey("SizeId");
 
+                    b.HasOne("PizzaBox.Domain.Models.Type", "type")
+                        .WithMany("Pizzas")
+                        .HasForeignKey("TypeId");
+
                     b.HasOne("PizzaBox.Domain.Models.Order", "ord")
                         .WithMany("Pizzas")
                         .HasForeignKey("ordOId");
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Size", b =>
+                {
+                    b.HasOne("PizzaBox.Domain.Models.Pizza", "Pizza")
+                        .WithMany()
+                        .HasForeignKey("PizzaPId");
+                });
+
+            modelBuilder.Entity("PizzaBox.Domain.Models.Type", b =>
                 {
                     b.HasOne("PizzaBox.Domain.Models.Pizza", "Pizza")
                         .WithMany()

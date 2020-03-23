@@ -15,7 +15,7 @@
   @foreach (var item in @Model) {
     <tr>
       <td>
-        Blah
+        @DateTime.Now.ToString("dd/MM/yyyy")
       </td>
       <td>
         @item.Store.location
@@ -42,3 +42,5 @@ else
 }
   </tbody>
 </table>
+
+<a href="/order/SelectStore" class="btn btn-primary btn-lg" role="button">Begin your order</a>

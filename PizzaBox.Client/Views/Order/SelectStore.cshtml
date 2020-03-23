@@ -5,14 +5,15 @@
 <form action = "/Order/SelectStore" method = "post">
   @Html.AntiForgeryToken()
 
-  <select asp-for="@Model.username">
+  <select asp-for="@Model.username" class="selectpicker">
     @foreach(var item in @Model.StoreList)
     {
       <option value="@item.username">@item.location</option>
     }
   </select>
 
-  <button type = "submit">Select</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  
 </form>
 
 

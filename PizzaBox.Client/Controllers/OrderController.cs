@@ -89,7 +89,15 @@ namespace PizzaBox.Client.Controllers
             p.size = s;
           }
         }
-        p.cost = p.crust.Price + p.size.Price;   
+
+        foreach(var t in pmod.TypeList)
+        {
+          if(pmod.Type == t.Name)
+          {
+            p.type = t;
+          }
+        }
+        p.cost = p.crust.Price + p.size.Price + p.type.Price;  
         pmod.cost = p.cost;
         PizzaList.Add(p);
         PizzaModelList.Add(pmod);
