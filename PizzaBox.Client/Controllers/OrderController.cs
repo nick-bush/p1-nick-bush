@@ -12,41 +12,49 @@ namespace PizzaBox.Client.Controllers
     private static readonly OrderRepository _or = new OrderRepository();
     private static readonly PizzaRepository _pr = new PizzaRepository();
     private static StoreRepository _sr = new StoreRepository();
+    private static UserRepository _ur = new UserRepository();
     public static List<Pizza> PizzaList = new List<Pizza>();
-
-    public static List<Store> StoreList = _sr.GetAllStores();
-
-    public static List<string> StoreNameList = new List <string>();
-
     
     public static List<PizzaModel> PizzaModelList = new List<PizzaModel>();
 
-    public static string UN = "";
+    
     [HttpGet]
     public IActionResult Details()
     {
       return View();
     }
 
-    // [HttpGet]
-    // public IActionResult SelectStore(string Username)
-    // {
-    // }
+    [HttpGet]
+    public IActionResult SelectStore()
+    {
+      return View(new StoreModel());
+    }
+
+    [HttpPost]
+    public IActionResult SelectStore(StoreModel store)
+    {
+      TempData["Store"] = store.username;
+      return View("Add", new PizzaModel());
+    }
 
 
     [HttpGet]
     public IActionResult Checkout()
     {
+      User u = _ur.GetUserWithUsername(TempData["user"].ToString());
+      Store s = _sr.GetStoreWithUsername(TempData["Store"].ToString());
       Order o = new Order();
+      o.usr = u;
+      o.str = s;
       o.cost = 0.00M;
       foreach(var p in PizzaList)
       {
         p.ord = o;
         o.cost = o.cost + p.cost;
       }
-      o.Pizzas = PizzaList; 
+      //o.Pizzas = PizzaList; 
       _or.Post(o);
-      foreach(var p in o.Pizzas)
+      foreach(var p in PizzaList)
       {
         _pr.Post(p);
       }   

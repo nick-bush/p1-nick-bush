@@ -1,0 +1,44 @@
+@model List<OrderModel>
+
+<h2>@ViewBag.Message</h2>
+<table class="table">
+    <thead>
+        <tr>
+          <th>Date</th>
+          <th>Location</th>  
+          <th>Cost</th>                              
+        </tr>
+    </thead>
+    <tbody>
+@if(Model != null)
+{
+  @foreach (var item in @Model) {
+    <tr>
+      <td>
+        Blah
+      </td>
+      <td>
+        @item.Store.location
+      </td>
+      <td>
+        @item.cost
+      </td>
+    </tr>
+  }
+}
+else
+{
+      <tr>
+      <td>
+        "N/A"
+      </td>
+      <td>
+        "N/A"
+      </td>
+      <td>
+        "N/A"
+      </td>
+    </tr>
+}
+  </tbody>
+</table>

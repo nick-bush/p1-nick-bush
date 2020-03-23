@@ -36,10 +36,12 @@ namespace PizzaBox.Domain.Models
        get; set;
     }
 
+
+
     public Order()
     {
      
-      //OId = DateTime.Now.Ticks;
+     
 
     }
 

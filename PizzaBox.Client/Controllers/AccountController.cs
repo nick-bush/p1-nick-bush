@@ -21,6 +21,7 @@ namespace PizzaBox.Client.Controllers
         {
           if(account.Username == u.username)
           {
+            TempData["User"] = account.Username;
             return View("User", account);
           }
           else

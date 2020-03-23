@@ -1,3 +1,18 @@
+@model PizzaBox.Client.Models.StoreModel
 
+<h2>Select Your Store</h2>
+
+<form action = "/Order/SelectStore" method = "post">
+  @Html.AntiForgeryToken()
+
+  <select asp-for="@Model.username">
+    @foreach(var item in @Model.StoreList)
+    {
+      <option value="@item.username">@item.location</option>
+    }
+  </select>
+
+  <button type = "submit">Select</button>
+</form>
 
 
