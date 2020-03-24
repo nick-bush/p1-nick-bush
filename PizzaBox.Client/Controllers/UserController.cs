@@ -18,7 +18,7 @@ namespace PizzaBox.Client.Controllers
     {
       List<Order> OrderList = new List<Order>();
       List<OrderModel> OrderModelList = new List<OrderModel>();
-      User u = _ur.GetUserWithUsername(TempData["user"].ToString());
+      User u = _ur.GetUserWithUsername(TempData.Peek("User").ToString());
       OrderList = _or.UserOrderHistory(u);
       if(OrderList!= null)
       {

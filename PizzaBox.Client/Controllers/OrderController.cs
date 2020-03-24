@@ -41,7 +41,8 @@ namespace PizzaBox.Client.Controllers
     [HttpGet]
     public IActionResult Checkout()
     {
-      User u = _ur.GetUserWithUsername(TempData["user"].ToString());
+      string un = TempData["User"].ToString();
+      User u = _ur.GetUserWithUsername(un);
       Store s = _sr.GetStoreWithUsername(TempData["Store"].ToString());
       Order o = new Order();
       o.usr = u;
