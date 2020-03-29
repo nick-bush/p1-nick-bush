@@ -60,20 +60,20 @@ stages:
               containerRegistry: "docker"
               command: "logout"
 
-  # - stage: deploy
-  #   jobs:
-  #     - job:
-  #       pool:
-  #         vmImage: ubuntu-18.04
-  #       steps:
-  #         - task: AzureRmWebAppDeployment@4
-  #           inputs:
-  #             ConnectionType: "AzureRM"
-  #             azureSubscription: "fredbelotte(560df603-82d8-4415-93a1-c821e91a310d)"
-  #             appType: "webAppContainer"
-  #             WebAppName: "trainingdotnet2020"
-  #             DockerNamespace: "fredbelotte"
-  #             DockerRepository: "p1proj"
+   - stage: deploy
+     jobs:
+       - job:
+         pool:
+           vmImage: ubuntu-18.04
+         steps:
+           - task: AzureRmWebAppDeployment@4
+             inputs:
+               ConnectionType: "AzureRM"
+               azureSubscription: "Azure subscription 1(0b1b5fa6-9439-411c-b239-b00cafe26de3)"
+               appType: "webAppContainer"
+               WebAppName: "PizzaBoxTest"
+               DockerNamespace: "nickbush"
+               DockerRepository: "project1"
 
 trigger:
   - master
@@ -82,4 +82,4 @@ variables:
   - name: image_name
     value: nickbush/project1
   - name: working_dir
-    value: $(System.DefaultWorkingDirectory)/p1-project
+    value: $(System.DefaultWorkingDirectory)/p1-nick-bush
