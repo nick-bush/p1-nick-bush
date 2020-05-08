@@ -4,7 +4,7 @@ and place your order - all from the comfort of your home!
 
 **Tech Stack**
 
-C#, ASP.NET Web API, SQL Server, ADO.NET Entity Framework, HTML, JavaScript, CSS
+C#, ASP.NET Web API, SQL Server, ADO.NET Entity Framework, HTML, JavaScript, CSS, Docker, Azure Pipelines
 
 **Implementation**
 
